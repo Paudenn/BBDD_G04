@@ -1,5 +1,5 @@
 -- --------------------------------------------------------
--- Host:                         147.83.7.205
+-- Host:                         127.0.0.1
 -- Versión del servidor:         10.6.5-MariaDB - mariadb.org binary distribution
 -- SO del servidor:              Win64
 -- HeidiSQL Versión:             11.3.0.6295
@@ -12,18 +12,36 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
+
+-- Volcando estructura de base de datos para dsag04
+CREATE DATABASE IF NOT EXISTS `dsag04` /*!40100 DEFAULT CHARACTER SET utf8mb3 */;
+USE `dsag04`;
+
+-- Volcando estructura para tabla dsag04.game
+CREATE TABLE IF NOT EXISTS `Game` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `level` int(11) DEFAULT NULL,
+  `score` int(11) DEFAULT NULL,
+  `playerID` int(11) DEFAULT NULL,
+  PRIMARY KEY (`ID`),
+  KEY `FK_game_user` (`playerID`),
+  CONSTRAINT `FK_game_user` FOREIGN KEY (`playerID`) REFERENCES `user` (`ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3;
+
+-- La exportación de datos fue deseleccionada.
+
 -- Volcando estructura para tabla dsag04.items
-CREATE TABLE IF NOT EXISTS `items` (
+CREATE TABLE IF NOT EXISTS `Items` (
   `name` varchar(50) DEFAULT NULL,
   `description` varchar(500) DEFAULT NULL,
   `ID` int(11) NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`ID`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb3;
 
 -- La exportación de datos fue deseleccionada.
 
 -- Volcando estructura para tabla dsag04.user
-CREATE TABLE IF NOT EXISTS `user` (
+CREATE TABLE IF NOT EXISTS `User` (
   `name` varchar(50) DEFAULT NULL,
   `password` varchar(50) DEFAULT NULL,
   `mail` varchar(250) DEFAULT NULL,
@@ -36,7 +54,7 @@ CREATE TABLE IF NOT EXISTS `user` (
 -- La exportación de datos fue deseleccionada.
 
 -- Volcando estructura para tabla dsag04.userinventory
-CREATE TABLE IF NOT EXISTS `userinventory` (
+CREATE TABLE IF NOT EXISTS `UserInventory` (
   `id_u` int(11) DEFAULT NULL,
   `id_i` int(11) DEFAULT NULL,
   KEY `FK_user` (`id_u`),
@@ -47,7 +65,3 @@ CREATE TABLE IF NOT EXISTS `userinventory` (
 
 -- La exportación de datos fue deseleccionada.
 
-/*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
-/*!40014 SET FOREIGN_KEY_CHECKS=IFNULL(@OLD_FOREIGN_KEY_CHECKS, 1) */;
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40111 SET SQL_NOTES=IFNULL(@OLD_SQL_NOTES, 1) */;
